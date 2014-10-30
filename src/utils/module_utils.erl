@@ -1,4 +1,5 @@
 %% GetoptEx project
+%% Erlang GetOpt Extended services
 %% Module utils functions
 %% (C) 2012 Angel J. Alvarez,  Initial design
 %% (C) 2014 Angel J. Alvarez, 

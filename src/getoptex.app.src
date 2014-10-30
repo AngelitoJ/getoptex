@@ -3,7 +3,7 @@
 
 {application, getopt_server,
  [
-  {description, ["GetOptEx , a getopt enhancement running as a standalone application."
+  {description, ["GetOptEx , a getopt enhancement"
                 ,"\nCopyright: 2014 Angel J. Alvarez Miguel"
                 ]},
   {author,["angeljalvarezmiguel@gmail.com"]},
@@ -13,6 +13,5 @@
                   kernel,
                   stdlib
                  ]},
-  {mod, { getopt_server_app, []}},
   {env, []}
  ]}.
