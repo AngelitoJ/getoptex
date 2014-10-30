@@ -1,17 +1,19 @@
 %% GetOptEx 
 %% (C) 2014 Angel J. Alvarez Miguel
 
-{application, getopt_server,
- [
-  {description, ["GetOptEx , a getopt enhancement"
-                ,"\nCopyright: 2014 Angel J. Alvarez Miguel"
-                ]},
-  {author,["angeljalvarezmiguel@gmail.com"]},
-  {vsn, "0.1"},
-  {registered, []},
-  {applications, [
-                  kernel,
-                  stdlib
-                 ]},
-  {env, []}
- ]}.
+{application, getoptex,
+                        [
+                          {description, [
+                                           "GetOptEx , a getopt enhancement"
+                                          ,"\nCopyright: 2014 Angel J. Alvarez Miguel"
+                                        ]}
+                          ,{author,["angeljalvarezmiguel@gmail.com"]}
+                          ,{vsn, "0.1"}
+                          ,{registered, []}
+                          ,{applications, [
+                                             kernel
+                                            ,stdlib
+                                          ]}
+                          ,{included_applications, [getopt]}
+                          ,{env, []}
+                        ]}.
