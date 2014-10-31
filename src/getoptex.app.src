@@ -15,5 +15,6 @@
                                             ,stdlib
                                           ]}
                           ,{included_applications, [getopt]}
+                          ,{modules,[getoptex,module_tools]}
                           ,{env, []}
                         ]}.
