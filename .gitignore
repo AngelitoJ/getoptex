@@ -1,0 +1,8 @@
+.eunit
+.rebar
+ebin
+deps
+*.o
+*.beam
+*.plt
+.build
