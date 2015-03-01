@@ -20,9 +20,12 @@ separate application and also bump getopt deps to the latest version.
 AUTHORS
 =======
 
-@ 2012, 2014 2015 Angel J. Alvarez <nageljalvarezmiguel@gmail.com>
+	@ 2012, 2014 2015 Angel J. Alvarez <nageljalvarezmiguel@gmail.com>
+
 	2012 Initial design (Catedromol project)
+
 	2014 Cosmetic Fixes OTP package
+
 	2015 Fixes and improvements
 
 
@@ -31,17 +34,17 @@ INSTALL
 
 Add GetOptEx as a dependency into your rebar.config like this:
 
-{deps,
-        [
-             {getopt,   ".*", {git, "https://github.com/jcomellas/getopt.git",   {branch, "master"}}}
-            ,{getoptex, ".*", {git, "https://github.com/angelitoj/getoptex.git", {branch, "master"}}}
-        ]}.
+	{deps,
+	        [
+	             {getopt,   ".*", {git, "https://github.com/jcomellas/getopt.git",   {branch, "master"}}}
+	            ,{getoptex, ".*", {git, "https://github.com/angelitoj/getoptex.git", {branch, "master"}}}
+	        ]}.
 
 
 Note that getOptEx depends on Juanjo Comellas's excelent getopt library. Also have in main when producing escript bundles
 to include getopt and getoptex in the generated archive like this:
 
-{escript_incl_apps,[getoptex, getopt, ... ]}.
+	{escript_incl_apps,[getoptex, getopt, ... ]}.
 
 
 
