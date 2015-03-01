@@ -20,7 +20,7 @@ separate application and also bump getopt deps to the latest version.
 AUTHORS
 =======
 
-	@ 2012, 2014 2015 Angel J. Alvarez <nageljalvarezmiguel@gmail.com>
+	@ 2012, 2014 2015 Angel J. Alvarez <angeljalvarezmiguel@gmail.com>
 
 	2012 Initial design (Catedromol project)
 
