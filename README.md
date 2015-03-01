@@ -94,14 +94,16 @@ to check in the escript main file just before starting the main OTP tree:
     {ok,Description}         = application:get_key(AppName,description),
     AppFilename              = escript:script_name(),
 
-    %% Scan app modules requiring options processing (Those exporting option_specs functions).
+Scan app modules requiring options processing (Those exporting option_specs functions).
 
     OptionProviders          = getoptex:list_app_modules(AppName,exports,option_specs),
 
-    %% Collect all option descriptors and funs into a single list.
+Then collect all option descriptors and funs into a single list.
 
     {OptSpecList,OptFunList} = getoptex:collect_option_providers(OptionProviders), 
 
+
+Proceed to parse, check and start your app or bang in front of the user :P
 
     io:format("~s  Version: ~s\n\n",[AppFilename, Version]),
 
