@@ -18,6 +18,25 @@ Originally getoptEx evolved from a bunch of modules used in my own applications 
 separate application and also bump getopt deps to the latest version.
 
 
+INSTALL
+=======
+
+Add GetOptEx as a dependency into your rebar.config like this:
+
+{deps,
+        [
+             {getopt,   ".*", {git, "https://github.com/jcomellas/getopt.git",   {branch, "master"}}}
+            ,{getoptex, ".*", {git, "https://github.com/angelitoj/getoptex.git", {branch, "master"}}}
+        ]}.
+
+
+Note that getOptEx depends on Juanjo Comellas's excelent getopt library. Also have in main when producing escript bundles
+to include getopt and getoptex in the generated archive like this:
+
+{escript_incl_apps,[getoptex, getopt, ... ]}.
+
+
+
 Usage
 =====
 
@@ -56,7 +75,7 @@ Modules that need to get its commandline options must export an option_checks fu
 	    }.
 
     
-	** keystore.erl **  %% Main escript file, comprises most command line options
+	** keystore.erl **  %% Main escript file, comprises most command line options bits
 
 	-module(keystore).
 	-export([option_specs/0])
@@ -71,7 +90,7 @@ Modules that need to get its commandline options must export an option_checks fu
 	            ,{verbose,     $v,        "verbose",     undefined,                    "Show all actions performed."}
 	            ,{version,     $V,        "version",     undefined,                    "Show software version."}
 	            ,{procs,       $P,        "cores",       {integer, Procesos },         "Number of workers (default 2*core)."}
-	            ,{timeout,     $T,        "timeout",     {integer, 300},                "Default app timeout in seconds."}
+	            ,{timeout,     $T,        "timeout",     {integer, 300},               "Default app timeout in seconds."}
 	        ]
 	        %% args processing funs required for some options
 	        ,[
@@ -83,8 +102,8 @@ Modules that need to get its commandline options must export an option_checks fu
 	    }.
 
 
-Once you have got all your exported functions you proceed to check command line options at any time in your app, i.e lets see how 
-to check in the escript main file just before starting the main OTP tree:
+Once you have got all your exported option descriptions and chexking functions you can proceed to check command line options 
+at any time in your app, i.e lets see how to check in the escript main file just before starting the main OTP tree:
 
 	AppName = ?MODULE,        
 
@@ -133,61 +152,9 @@ Proceed to parse, check and start your app or bang in front of the user :P
     end.
 
 
+Author
+======
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Scan app modules requiring options descriptor processing (Those exporting option_specs functions).
-    OptionProviders          = getoptex:list_app_modules(AppName,exports,option_specs),
-
-    %% Collect all option descriptors and funs into a single list.
-    {OptSpecList,OptFunList} = getoptex:collect_option_providers(OptionProviders), 
-
-
-    io:format("~s  Version: ~s\n\n",[AppFilename, Version]),
-
-    %% Parse args using option descriptors and then check args values using provided funs.
-    case getoptex:parse_args(OptSpecList, Args, OptFunList) of
-
-    {ok, {AppOpts, _OtherArgs}} ->                      %% Everything went Ok.
-        app_main(AppName,AppOpts);     %% Start the application, AppOpts is a property list.
-
-    {help} ->                                           %% Help request detected..
-        getopt:usage(OptSpecList, AppFilename);         %% Provide info about usage.
-
-    {version} ->                                        %% Software version requested..
-        io:format("~s (v ~s)\n~s\n", 
-        	[AppFilename, Version, Description]);       %% Show the info.
-
-    {error, {invalid_option_arg, Data}} ->              %% Some argument was wrong..
-        io:format("Error:\n\t Invalid option: ~p~n~n",  
-        	[Data]),                                    %% Show the offending bits.
-        getopt:usage(OptSpecList, AppFilename);         %% Provide info about usage.
-
-    {error, {Reason, Data}} ->                          %% Something else went wrong.. 
-        io:format("Error:\n\t~s ~p~n~n",
-        	[Reason, Data]),                            %% Show some error diagnostics
-        getopt:usage(OptSpecList, AppFilename)          %% Provide info about usage.
-
-    end.
-
-	parse_args(SpecList, ArgList, FunList)
+GetOptEx is a work
 
 
