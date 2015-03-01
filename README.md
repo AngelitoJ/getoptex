@@ -17,6 +17,14 @@ there are gatherer automagically...
 Originally getoptEx evolved from a bunch of modules used in my own applications but I decided to move them into a 
 separate application and also bump getopt deps to the latest version.
 
+AUTHORS
+=======
+
+@ 2012, 2014 2015 Angel J. Alvarez <nageljalvarezmiguel@gmail.com>
+	2012 Initial design (Catedromol project)
+	2014 Cosmetic Fixes OTP package
+	2015 Fixes and improvements
+
 
 INSTALL
 =======
@@ -50,13 +58,9 @@ Some types:
 
 
 
-Modules that need to get its commandline options must export an option_checks fun, i.e: 
+Modules that need to get its commandline options must export an option_specs function. Let see a simple escript bundle comprising 
+a gen_server key-store, 'db_srv.erl':
 
-
-
-	*** A Simple escript bundle comprising a gen_server key store 
-
-	** db_srv.erl ** code for a gen_server supporting DB queries
 
 	-module(db_srv).
 	-export([option_specs/0]).
@@ -74,8 +78,7 @@ Modules that need to get its commandline options must export an option_checks fu
 	            ]
 	    }.
 
-    
-	** keystore.erl **  %% Main escript file, comprises most command line options bits
+Now 'keystore.erl' the escript main file, comprising most command line options bits and OTP startup pre-flight checks
 
 	-module(keystore).
 	-export([option_specs/0])
@@ -102,7 +105,7 @@ Modules that need to get its commandline options must export an option_checks fu
 	    }.
 
 
-Once you have got all your exported option descriptions and chexking functions you can proceed to check command line options 
+Once you have got all your exported option descriptions and checking functions you can proceed to check command line options 
 at any time in your app, i.e lets see how to check in the escript main file just before starting the main OTP tree:
 
 	AppName = ?MODULE,        
@@ -113,16 +116,17 @@ at any time in your app, i.e lets see how to check in the escript main file just
     {ok,Description}         = application:get_key(AppName,description),
     AppFilename              = escript:script_name(),
 
-Scan app modules requiring options processing (Those exporting option_specs functions).
+
+No use GetOptEx to scan app modules requiring options processing (those exporting option_specs function).
 
     OptionProviders          = getoptex:list_app_modules(AppName,exports,option_specs),
 
-Then collect all option descriptors and funs into a single list.
+And collect all these option descriptors and checking funs into a single list.
 
     {OptSpecList,OptFunList} = getoptex:collect_option_providers(OptionProviders), 
 
 
-Proceed to parse, check and start your app or bang in front of the user :P
+Proceed to parse user supplied agrs, check them and start your app (or bang in front of the user :P)
 
     io:format("~s  Version: ~s\n\n",[AppFilename, Version]),
 
@@ -152,9 +156,6 @@ Proceed to parse, check and start your app or bang in front of the user :P
     end.
 
 
-Author
-======
 
-GetOptEx is a work
 
 
