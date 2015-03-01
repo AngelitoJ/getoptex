@@ -1,9 +1,9 @@
 %% GetoptEx project
 %% Erlang GetOpt Extended services
-%% @ 2012, 2014 Angel J. Alvarez
+%% @ 2012, 2014 2015 Angel J. Alvarez
 %% 2012 Initial design Catedromol project
-%% 2014 Cosmetic Fixes
-%%
+%% 2014 Cosmetic Fixes OTP package
+%% 2015 Fixes and improvements
 %%
 
 -module(getoptex).
